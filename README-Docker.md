@@ -109,6 +109,49 @@ docker-compose exec auth-service sh
 docker stats
 ```
 
+## 🔧 Servicio de Windows (Inicio Automático)
+
+Para que los servicios Docker se inicien automáticamente al reiniciar Windows, puedes instalar un servicio de Windows.
+
+### Instalación del Servicio
+
+**Opción 1: Script Batch (Recomendado)**
+```bash
+# Ejecutar como Administrador
+install-service.bat
+```
+
+**Opción 2: Script PowerShell**
+```powershell
+# Ejecutar PowerShell como Administrador
+.\install-service.ps1
+```
+
+### Gestión del Servicio
+
+```bash
+# Iniciar servicio manualmente
+sc start "ServerRnpDockerCompose"
+
+# Detener servicio
+sc stop "ServerRnpDockerCompose"
+
+# Ver estado del servicio
+sc query "ServerRnpDockerCompose"
+
+# Desinstalar servicio
+uninstall-service.bat
+```
+
+### Características del Servicio
+
+- ✅ **Inicio automático** al arrancar Windows
+- ✅ **Reinicio automático** en caso de fallo
+- ✅ **Gestión desde Servicios de Windows**
+- ✅ **Logs integrados** con el sistema
+
+**Nota:** El servicio ejecutará `docker-compose up` automáticamente y mantendrá todos los contenedores funcionando.
+
 ## 🌐 Acceso a los Servicios
 
 ### A través de Nginx (Recomendado)

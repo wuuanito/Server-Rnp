@@ -1,0 +1,24 @@
+[Unit]
+Description=Monitor de Botes (Ponderal y Expulsados) - Raspberry Pi
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/root/ponderal-monitor
+ExecStart=/usr/bin/python3 /root/ponderal-monitor/raspberry_botes_monitor.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Variables de entorno
+Environment=PYTHONUNBUFFERED=1
+
+# Permisos para acceder a GPIO
+# SupplementaryGroups=gpio  # No necesario para root
+
+[Install]
+WantedBy=multi-user.target

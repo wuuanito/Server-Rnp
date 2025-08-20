@@ -35,9 +35,8 @@ CREATE DATABASE IF NOT EXISTS auth_service_db;
 CREATE DATABASE IF NOT EXISTS cremer;
 CREATE DATABASE IF NOT EXISTS tecnomaco;
 
--- Crear usuario para Auth Service (opcional)
-CREATE USER IF NOT EXISTS 'naturepharma'@'%' IDENTIFIED BY 'Root123!';
-GRANT ALL PRIVILEGES ON auth_service_db.* TO 'naturepharma'@'%';
+-- Asegurar que el usuario root tenga acceso desde cualquier host
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root';
 FLUSH PRIVILEGES;
 ```
 

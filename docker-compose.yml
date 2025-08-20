@@ -12,8 +12,8 @@ services:
       - PORT=4001
       - DB_HOST=host.docker.internal
       - DB_PORT=3306
-      - DB_USER=naturepharma
-      - DB_PASSWORD=Root123!
+      - DB_USER=root
+      - DB_PASSWORD=root
       - AUTH_DB_NAME=auth_service_db
       - JWT_SECRET=your_jwt_secret_key_should_be_long_and_secure_change_this_in_production
       - JWT_EXPIRES_IN=24h

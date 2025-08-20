@@ -72,11 +72,11 @@ echo           SERVICIOS INICIADOS
 echo ========================================
 echo.
 echo 🌐 Acceso a los servicios:
-echo   • Página principal:    http://localhost/
-echo   • Auth Service:        http://localhost/auth/
-echo   • Cremer Backend:      http://localhost/cremer/
-echo   • Tecnomaco Backend:   http://localhost/tecnomaco/
-echo   • Servidor RPS:        http://localhost/rps/
+echo   • Página principal:    http://localhost:8080/
+echo   • Auth Service:        http://localhost:8080/auth/
+echo   • Cremer Backend:      http://localhost:8080/cremer/
+echo   • Tecnomaco Backend:   http://localhost:8080/tecnomaco/
+echo   • Servidor RPS:        http://localhost:8080/rps/
 echo.
 echo 🔧 Acceso directo:
 echo   • Auth Service:        http://localhost:4001

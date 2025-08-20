@@ -94,11 +94,11 @@ docker stats
 
 ### A través de Nginx (Recomendado)
 
-- **Página Principal:** http://localhost/
-- **Auth Service:** http://localhost/auth/
-- **Cremer Backend:** http://localhost/cremer/
-- **Tecnomaco Backend:** http://localhost/tecnomaco/
-- **Servidor RPS:** http://localhost/rps/
+- **Página Principal:** http://localhost:8080/
+- **Auth Service:** http://localhost:8080/auth/
+- **Cremer Backend:** http://localhost:8080/cremer/
+- **Tecnomaco Backend:** http://localhost:8080/tecnomaco/
+- **Servidor RPS:** http://localhost:8080/rps/
 
 ### Acceso Directo
 

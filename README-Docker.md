@@ -6,11 +6,11 @@ Este proyecto contiene una configuración completa de Docker para orquestar múl
 
 | Servicio | Puerto | Descripción | Base de Datos |
 |----------|--------|-------------|---------------|
-| **Auth Service** | 4001 | Servicio de autenticación y autorización | MySQL (Puerto 3307) |
-| **Cremer Backend** | 3002 | Backend para gestión de órdenes Cremer | MySQL (Puerto 3308) |
-| **Tecnomaco Backend** | 3005 | Backend para gestión de órdenes Tecnomaco | MySQL (Puerto 3309) |
+| **Auth Service** | 4001 | Servicio de autenticación y autorización | MySQL Local (auth_service_db) |
+| **Cremer Backend** | 3002 | Backend para gestión de órdenes Cremer | MySQL Local (cremer) |
+| **Tecnomaco Backend** | 3005 | Backend para gestión de órdenes Tecnomaco | MySQL Local (tecnomaco) |
 | **Servidor RPS** | 4000 | Servidor para conexión con SQL Server RPS | SQL Server Externo |
-| **Nginx Proxy** | 80/443 | Reverse proxy y balanceador de carga | - |
+| **Nginx Proxy** | 8080/8443 | Reverse proxy y balanceador de carga | - |
 
 ## 🚀 Inicio Rápido
 
@@ -18,8 +18,28 @@ Este proyecto contiene una configuración completa de Docker para orquestar múl
 
 - Docker Desktop instalado
 - Docker Compose v3.8 o superior
-- Al menos 4GB de RAM disponible
-- Puertos 80, 3002, 3005, 4000, 4001, 3307, 3308, 3309 disponibles
+- **MySQL Server instalado localmente** (puerto 3306)
+- Al menos 2GB de RAM disponible
+- Puertos 8080, 8443, 3002, 3005, 4000, 4001 disponibles
+
+### Configuración de Base de Datos
+
+Antes de ejecutar los servicios, asegúrate de tener MySQL corriendo localmente y crear las bases de datos necesarias:
+
+```sql
+-- Conectar a MySQL local
+mysql -u root -p
+
+-- Crear bases de datos
+CREATE DATABASE IF NOT EXISTS auth_service_db;
+CREATE DATABASE IF NOT EXISTS cremer;
+CREATE DATABASE IF NOT EXISTS tecnomaco;
+
+-- Crear usuario para Auth Service (opcional)
+CREATE USER IF NOT EXISTS 'naturepharma'@'%' IDENTIFIED BY 'Root123!';
+GRANT ALL PRIVILEGES ON auth_service_db.* TO 'naturepharma'@'%';
+FLUSH PRIVILEGES;
+```
 
 ### Instalación
 
@@ -109,9 +129,12 @@ docker stats
 
 ### Bases de Datos
 
-- **MySQL Auth:** localhost:3307
-- **MySQL Cremer:** localhost:3308
-- **MySQL Tecnomaco:** localhost:3309
+**Nota:** Las bases de datos no están dockerizadas. Los servicios se conectan a MySQL local.
+
+- **MySQL Local:** localhost:3306
+  - Base de datos `auth_service_db` para Auth Service
+  - Base de datos `cremer` para Cremer Backend  
+  - Base de datos `tecnomaco` para Tecnomaco Backend
 
 ## 📁 Estructura del Proyecto
 

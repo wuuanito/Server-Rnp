@@ -85,9 +85,10 @@ echo   • Tecnomaco Backend:   http://localhost:3005
 echo   • Servidor RPS:        http://localhost:4000
 echo.
 echo 💾 Bases de datos:
-echo   • MySQL Auth:          localhost:3307
-echo   • MySQL Cremer:        localhost:3308
-echo   • MySQL Tecnomaco:     localhost:3309
+echo   • MySQL Local:         localhost:3306
+echo     - auth_service_db (Auth Service)
+echo     - cremer (Cremer Backend)
+echo     - tecnomaco (Tecnomaco Backend)
 echo.
 echo 📝 Comandos útiles:
 echo   • Ver logs:            docker-compose logs -f

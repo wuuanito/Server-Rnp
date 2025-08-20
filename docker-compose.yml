@@ -10,15 +10,13 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=4001
-      - DB_HOST=mysql-auth
+      - DB_HOST=host.docker.internal
       - DB_PORT=3306
       - DB_USER=naturepharma
       - DB_PASSWORD=Root123!
       - AUTH_DB_NAME=auth_service_db
       - JWT_SECRET=your_jwt_secret_key_should_be_long_and_secure_change_this_in_production
       - JWT_EXPIRES_IN=24h
-    depends_on:
-      - mysql-auth
     networks:
       - app-network
     restart: unless-stopped
@@ -39,12 +37,10 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3002
-      - DB_HOST=mysql-cremer
+      - DB_HOST=host.docker.internal
       - DB_USER=root
       - DB_PASS=root
       - DB_NAME=cremer
-    depends_on:
-      - mysql-cremer
     networks:
       - app-network
     restart: unless-stopped
@@ -65,12 +61,10 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3005
-      - DB_HOST=mysql-tecnomaco
+      - DB_HOST=host.docker.internal
       - DB_USER=root
       - DB_PASS=root
       - DB_NAME=tecnomaco
-    depends_on:
-      - mysql-tecnomaco
     networks:
       - app-network
     restart: unless-stopped
@@ -105,67 +99,7 @@ services:
       timeout: 10s
       retries: 3
 
-  # Base de datos MySQL para Auth Service
-  mysql-auth:
-    image: mysql:8.0
-    container_name: mysql-auth
-    environment:
-      - MYSQL_ROOT_PASSWORD=Root123!
-      - MYSQL_DATABASE=auth_service_db
-      - MYSQL_USER=naturepharma
-      - MYSQL_PASSWORD=Root123!
-    ports:
-      - "3307:3306"
-    volumes:
-      - mysql_auth_data:/var/lib/mysql
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
-  # Base de datos MySQL para Cremer
-  mysql-cremer:
-    image: mysql:8.0
-    container_name: mysql-cremer
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=cremer
-    ports:
-      - "3308:3306"
-    volumes:
-      - mysql_cremer_data:/var/lib/mysql
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  # Base de datos MySQL para Tecnomaco
-  mysql-tecnomaco:
-    image: mysql:8.0
-    container_name: mysql-tecnomaco
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=tecnomaco
-    ports:
-      - "3309:3306"
-    volumes:
-      - mysql_tecnomaco_data:/var/lib/mysql
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   # Nginx como reverse proxy (opcional)
   nginx:
@@ -186,13 +120,7 @@ services:
       - app-network
     restart: unless-stopped
 
-volumes:
-  mysql_auth_data:
-    driver: local
-  mysql_cremer_data:
-    driver: local
-  mysql_tecnomaco_data:
-    driver: local
+
 
 networks:
   app-network:

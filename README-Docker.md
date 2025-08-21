@@ -10,6 +10,7 @@ Este proyecto contiene una configuración completa de Docker para orquestar múl
 | **Cremer Backend** | 3002 | Backend para gestión de órdenes Cremer | MySQL Local (cremer) |
 | **Tecnomaco Backend** | 3005 | Backend para gestión de órdenes Tecnomaco | MySQL Local (tecnomaco) |
 | **Servidor RPS** | 4000 | Servidor para conexión con SQL Server RPS | SQL Server Externo |
+| **OSMOSIS Service** | 8000 | Monitor de señales de sistema de ósmosis | MySQL Local (osmosis_monitor) |
 | **Nginx Proxy** | 8080/8443 | Reverse proxy y balanceador de carga | - |
 
 ## 🚀 Inicio Rápido
@@ -34,6 +35,7 @@ mysql -u root -p
 CREATE DATABASE IF NOT EXISTS auth_service_db;
 CREATE DATABASE IF NOT EXISTS cremer;
 CREATE DATABASE IF NOT EXISTS tecnomaco;
+CREATE DATABASE IF NOT EXISTS osmosis_monitor;
 
 -- Asegurar que el usuario root tenga acceso desde cualquier host
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root';
@@ -161,6 +163,7 @@ uninstall-service.bat
 - **Cremer Backend:** http://localhost:8080/cremer/
 - **Tecnomaco Backend:** http://localhost:8080/tecnomaco/
 - **Servidor RPS:** http://localhost:8080/rps/
+- **OSMOSIS Service:** http://localhost:8080/osmosis/
 
 ### Acceso Directo
 

@@ -99,7 +99,32 @@ services:
       timeout: 10s
       retries: 3
 
-
+  # Servicio OSMOSIS
+  osmosis-service:
+    build:
+      context: ./OSMOSIS
+      dockerfile: Dockerfile
+    container_name: osmosis-service
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ENV=production
+      - PORT=8000
+      - DB_HOST=host.docker.internal
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=osmosis_monitor
+      - WS_URL=ws://192.168.20.103:8765
+      - TZ=Europe/Madrid
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:8000/api/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) }).on('error', () => process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   # Nginx como reverse proxy (opcional)
   nginx:
@@ -116,6 +141,7 @@ services:
       - cremer-backend
       - tecnomaco-backend
       - servidor-rps
+      - osmosis-service
     networks:
       - app-network
     restart: unless-stopped
